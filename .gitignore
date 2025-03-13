@@ -1,2 +1,3 @@
-install.sh
-.gitignore
+!install.sh
+!.gitignore
+
