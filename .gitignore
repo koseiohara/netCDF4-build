@@ -1,4 +1,10 @@
-!install.sh
-!.gitignore
-*/
+HDF5
+NetCDF-C
+bin
+hdf5
+include
+lib
+log
+share
+*.txt
 

@@ -161,7 +161,9 @@ case "$1" in
         mkdir log/
         echo all
         INSTALL_HDF5
+        echo
         INSTALL_NC_C
+        echo
         INSTALL_NC_F
         ;;
     hdf5|--hdf5)
