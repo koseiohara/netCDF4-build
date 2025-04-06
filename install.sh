@@ -34,8 +34,8 @@ function INSTALL_HDF5(){
         echo "${TAR} Already Exist"
     fi
 
-    echo "tar -zxvf ${TAR}"
-    tar -zxvf ${TAR}
+    echo "tar -zxf ${TAR}"
+    tar -zxf ${TAR}
 
     echo "cd hdf5-${HDF_VERSION}"
     cd "hdf5-${HDF_VERSION}"
@@ -76,8 +76,8 @@ function INSTALL_NC_C(){
         echo "${TAR} Already Exist"
     fi
 
-    echo "tar -zxvf ${TAR}"
-    tar -zxvf ${TAR}
+    echo "tar -zxf ${TAR}"
+    tar -zxf ${TAR}
 
     echo "cd netcdf-c-${NC_C_VERSION}"
     cd "netcdf-c-${NC_C_VERSION}"
@@ -116,8 +116,8 @@ function INSTALL_NC_F(){
         echo "${TAR} Alreaady Exist"
     fi
 
-    echo "tar -zxvf ${TAR}"
-    tar -zxvf ${TAR}
+    echo "tar -zxf ${TAR}"
+    tar -zxf ${TAR}
 
     echo "cd netcdf-fortran-${NC_F_VERSION}"
     cd "netcdf-fortran-${NC_F_VERSION}"
@@ -155,11 +155,11 @@ case "$1" in
         clean
         ;;
     all|--all)
-        echo "mkdir log/"
-        mkdir log/
-        echo alll
         clean
         echo "Cleaned"
+        echo "mkdir log/"
+        mkdir log/
+        echo all
         INSTALL_HDF5
         INSTALL_NC_C
         INSTALL_NC_F
