@@ -20,6 +20,8 @@ export CFLAGS=" -O3"
 
 
 function INSTALL_HDF5(){
+    cd ${HERE}
+
     echo "mkdir ${HDF_DIR}"
     mkdir ${HDF_DIR}
     TAR="hdf5-${HDF_VERSION}.tar.gz"
@@ -51,13 +53,12 @@ function INSTALL_HDF5(){
 
     echo "make install > ${HERE}/log/log_install_hdf5.txt 2>&1"
     make install > ${HERE}/log/log_install_hdf5.txt 2>&1
-
-    echo "cd ${HERE}"
-    cd ${HERE}
 }
 
 
 function INSTALL_NC_C(){
+    cd ${HERE}
+
     export CPPFLAGS="-I${HERE}/include"
     export LDFLAGS="-L${HERE}/lib"
 
@@ -66,6 +67,7 @@ function INSTALL_NC_C(){
     echo "mkdir ${NC_C_DIR}"
     mkdir ${NC_C_DIR}
 
+    echo "cd ${NC_C_DIR}"
     cd ${NC_C_DIR}
 
     if [ ! -e ${TAR} ]
@@ -97,6 +99,8 @@ function INSTALL_NC_C(){
 
 
 function INSTALL_NC_F(){
+    cd ${HERE}
+
     export CPPFLAGS="-I${HERE}/include"
     export LDFLAGS="-L${HERE}/lib"
     export LD_LIBRARY_PATH=${HERE}/lib:${LD_LIBRARY_PATH}
@@ -106,6 +110,7 @@ function INSTALL_NC_F(){
     echo "mkdir ${NC_F_DIR}"
     mkdir ${NC_F_DIR}
 
+    echo "cd ${NC_F_DIR}"
     cd ${NC_F_DIR}
 
     if [ ! -e ${TAR} ]
