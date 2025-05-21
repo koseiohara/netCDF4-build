@@ -1,4 +1,4 @@
-#!/bash/bin
+#!/bin/bash
 
 HERE=$PWD
 
@@ -7,8 +7,11 @@ HDF_VERSION="1.14.6"
 
 NC_C_DIR="NetCDF-C"
 NC_C_VERSION="4.9.3"
+
 NC_F_DIR="NetCDF-F"
 NC_F_VERSION="4.6.2"
+
+INSTALL="${HOME}/FortranLib"
 
 
 export FC=ifort
@@ -42,8 +45,8 @@ function INSTALL_HDF5(){
     echo "cd hdf5-${HDF_VERSION}"
     cd "hdf5-${HDF_VERSION}"
 
-    echo "./configure --prefix=${HERE} --enable-fortran > ${HERE}/log/log_configure_hdf5.txt 2>&1"
-    ./configure --prefix=${HERE} --enable-fortran > ${HERE}/log/log_configure_hdf5.txt 2>&1
+    echo "./configure --prefix=${INSTALL} --enable-fortran > ${HERE}/log/log_configure_hdf5.txt 2>&1"
+    ./configure --prefix=${INSTALL} --enable-fortran > ${HERE}/log/log_configure_hdf5.txt 2>&1
 
     echo "make > ${HERE}/log/log_make_hdf5.txt 2>&1"
     make > ${HERE}/log/log_make_hdf5.txt 2>&1
@@ -59,8 +62,8 @@ function INSTALL_HDF5(){
 function INSTALL_NC_C(){
     cd ${HERE}
 
-    export CPPFLAGS="-I${HERE}/include"
-    export LDFLAGS="-L${HERE}/lib"
+    export CPPFLAGS="-I${INSTALL}/include"
+    export LDFLAGS="-L${INSTALL}/lib"
 
     TAR="v${NC_C_VERSION}.tar.gz"
 
@@ -84,8 +87,8 @@ function INSTALL_NC_C(){
     echo "cd netcdf-c-${NC_C_VERSION}"
     cd "netcdf-c-${NC_C_VERSION}"
 
-    echo "./configure --prefix=${HERE} --enable-netcdf-4 > ${HERE}/log/log_configure_ncc.txt 2>&1"
-    ./configure --prefix=${HERE} --enable-netcdf-4 > ${HERE}/log/log_configure_ncc.txt 2>&1
+    echo "./configure --prefix=${INSTALL} --enable-netcdf-4 > ${HERE}/log/log_configure_ncc.txt 2>&1"
+    ./configure --prefix=${INSTALL} --enable-netcdf-4 > ${HERE}/log/log_configure_ncc.txt 2>&1
 
     echo "make > ${HERE}/log/log_make_ncc.txt 2>&1"
     make > ${HERE}/log/log_make_ncc.txt 2>&1
@@ -101,9 +104,9 @@ function INSTALL_NC_C(){
 function INSTALL_NC_F(){
     cd ${HERE}
 
-    export CPPFLAGS="-I${HERE}/include"
-    export LDFLAGS="-L${HERE}/lib"
-    export LD_LIBRARY_PATH=${HERE}/lib:${LD_LIBRARY_PATH}
+    export CPPFLAGS="-I${INSTALL}/include"
+    export LDFLAGS="-L${INSTALL}/lib"
+    export LD_LIBRARY_PATH=${INSTALL}/lib:${LD_LIBRARY_PATH}
 
     TAR="netcdf-fortran-${NC_F_VERSION}.tar.gz"
 
@@ -127,8 +130,8 @@ function INSTALL_NC_F(){
     echo "cd netcdf-fortran-${NC_F_VERSION}"
     cd "netcdf-fortran-${NC_F_VERSION}"
 
-    echo "./configure --prefix=${HERE} > ${HERE}/log/log_configure_ncf.txt 2>&1"
-    ./configure --prefix=${HERE} > ${HERE}/log/log_configure_ncf.txt 2>&1
+    echo "./configure --prefix=${INSTALL} > ${HERE}/log/log_configure_ncf.txt 2>&1"
+    ./configure --prefix=${INSTALL} > ${HERE}/log/log_configure_ncf.txt 2>&1
 
     echo "make > ${HERE}/log/log_make_ncf.txt 2>&1"
     make > ${HERE}/log/log_make_ncf.txt 2>&1
@@ -151,6 +154,7 @@ function clean(){
     rm -rfv ./${HDF_DIR}
     rm -rfv ./${NC_C_DIR}
     rm -rfv ./${NC_F_DIR}
+    rm -rfv ./hdf5/
 }
 
 
